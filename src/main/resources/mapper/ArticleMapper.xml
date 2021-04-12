@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.learn.springboot.blog.dao.ArticleDao">
+    <sql id="BASE_TABLE">
+        t_article
+    </sql>
+
+    <sql id="BASE_COLUMN">
+        id, create_time, author_id, title, content, keyword, star,
+    </sql>
+
+    <insert id="save" parameterType="com.learn.springboot.blog.entity.Article">
+        INSERT INTO
+        <include refid="BASE_TABLE"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            create_time,
+            author_id,
+            title,
+            content,
+            keyword,
+            star,
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            REPLACE(UUID(), '-', ''),
+            UNIX_TIMESTAMP(NOW()),
+            #{authorId, jdbcType=CHAR},
+            #{title, jdbcType=VARCHAR},
+            #{content, jdbcType=VARCHAR},
+            #{keyword, jdbcType=VARCHAR},
+            0,
+        </trim>
+    </insert>
+
+    <select id="findAll">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/>
+    </select>
+
+    <select id="findByAuthor">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/>
+        WHERE
+            author_id = #{authorId, jdbcType=VARCHER}
+    </select>
+
+    <select id="findById">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/>
+        WHERE
+        id = #{id, jdbcType=VARCHER}
+    </select>
+</mapper>

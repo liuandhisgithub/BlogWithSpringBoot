@@ -1,4 +1,4 @@
-package java.com.learn.springboot.blog.entity;
+package com.learn.springboot.blog.entity;
 
 import java.util.Date;
 
@@ -21,6 +21,10 @@ public class Article {
      * 创建时间
      */
     private Date createTime;
+    /**
+     * 标题
+     */
+    private String title;
     /**
      * 内容
      */
@@ -56,6 +60,14 @@ public class Article {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {

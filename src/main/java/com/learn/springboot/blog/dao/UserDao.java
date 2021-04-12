@@ -1,12 +1,16 @@
 package com.learn.springboot.blog.dao;
 
 import com.learn.springboot.blog.entity.User;
-import org.springframework.stereotype.Repository;
-
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
-@Repository
+@Mapper
 public interface UserDao {
 
-    public List<User> findAll();
+    List<User> findAll();
+
+    void save(User user);
+
+    User findByUserNameAndPassword(@Param("userName")String userName, @Param("password")String password);
 }
