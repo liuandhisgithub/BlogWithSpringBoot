@@ -27,7 +27,7 @@ public interface MetaDao {
 
     void deleteById(String id);
 
-    Long findByType(@Param("type") String type);
+    Long countByType(@Param("type") String type);
 
     MetaDomain findByName(@Param("type") String type, @Param("name") String name);
 
